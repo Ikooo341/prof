@@ -1,94 +1,128 @@
-<header>
+<!-- PROGRAMMED BY Ikoo_ -->
 
-<!--
-  <<< Author notes: Course header >>>
-  Read <https://skills.github.com/quickstart> for more information about how to build courses using this template.
-  Include a 1280×640 image, course name in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Next to "About", add description & tags; disable releases, packages, & environments.
-  Add your open source license, GitHub uses the MIT license.
--->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #FAEEE6;
+        }
+        #content {
+            border: 1px solid transparent;
+            background-color: #FFC0CB;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            padding: 20px;
+            text-align: center;
+        }
+        #yesButton, #noButton {
+            font-size: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+        #yesButton {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+        #noButton {
+            background-color: #f44336; /* Red */
+            color: white;
+        }
+        #noButton:disabled {
+            background-color: #ddd;
+            color: #666;
+            box-shadow: none;
+        }
+        #yesButton:hover, #noButton:hover {
+            box-shadow: 0 12px 20px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
 
-# Code with GitHub Copilot
+        .heart {
+            position: fixed;
+            top: -100px;
+            width: 100px;
+            height: 100px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 29.6"><path fill="%23FF0000" d="M16 29.6c-1-.6-21-12.6-16-20C5.7 5.6 10.3 4 16 11c5.7-7 10.3-5.4 16-2.6 5 7.4-15 19.6-16 20z"/></svg>');
+            animation: fall 4s linear infinite;     /* W3SCHOOL ANIMATION NG HEART */
+        }
 
-_GitHub Copilot can help you code by offering autocomplete-style suggestions right in VS Code and Codespaces._
+        @keyframes fall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
 
-</header>
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h2 id="question">Pwede kaba maging girlfriend ko?</h2>
+        <button id="yesButton">YES</button>
+        <button id="noButton">NO</button>
+        <p id="message"></p>
+    </div>
 
-<!--
-  <<< Author notes: Step 1 >>>
-  Choose 3-5 steps for your course.
-  The first step is always the hardest, so pick something easy!
-  Link to docs.github.com for further explanations.
-  Encourage users to open new tabs for steps!
--->
+    <script>
+        var noClickCount = 0;
+        document.getElementById('noButton').addEventListener('click', function() { //NOOOOO button
+            noClickCount++;
+            if (noClickCount == 1) {
+                document.getElementById('yesButton').style.fontSize = '30px';
+            } else if (noClickCount == 2) {
+                this.style.fontSize = '10px';
+                document.getElementById('yesButton').style.fontSize = '40px';
+            } else if (noClickCount == 3) {
+                document.getElementById('yesButton').style.fontSize = '90px';
+                this.style.fontSize = '7px';
+            } else if (noClickCount == 4) {
+                this.style.position = 'absolute';
+                this.style.left = Math.random() * window.innerWidth + 'px';
+                this.style.top = Math.random() * window.innerHeight + 'px';
+            } else if (noClickCount >= 5 && noClickCount < 10) {
+                this.style.position = 'absolute';
+                this.style.left = Math.random() * window.innerWidth + 'px';
+                this.style.top = Math.random() * window.innerHeight + 'px';
+            } else if (noClickCount >= 10 && noClickCount < 15) {
+                // Avoid disabling the button
+                // this.disabled = true;
+                this.style.position = 'absolute';
+                this.style.left = Math.random() * window.innerWidth + 'px';
+                this.style.top = Math.random() * window.innerHeight + 'px';
+                document.getElementById('message').innerText = 'Are you sure?';
+                document.getElementById('message').style.position = 'absolute';
+                document.getElementById('message').style.left = this.style.left;
+                document.getElementById('message').style.top = parseFloat(this.style.top) + 50 + 'px';
+            } else if (noClickCount == 15) {
+                document.getElementById('message').innerText = 'Oh No! You broke the button :c';
+                this.disabled = true;
+                this.style.color = grey;
+                document.getElementById('message').innerText = 'Oh No! You broke the button :c';
+            }
+        });
 
-## Step 1: Leverage Codespaces with VS Code for Copilot
-
-_Welcome to "Develop With AI Powered Code Suggestions Using GitHub Copilot and VS Code"! :wave:_
-
-GitHub Copilot is an AI pair programmer that helps you write code faster and with less work. It draws context from comments and code to suggest individual lines and whole functions instantly. GitHub Copilot is powered by OpenAI Codex, a generative pretrained language model created by OpenAI.
-
-**Copilot works with many code editors including VS Code, Visual Studio, JetBrains IDE, and Neovim.**
-
-Additionally, GitHub Copilot is trained on all languages that appear in public repositories. For each language, the quality of suggestions you receive may depend on the volume and diversity of training data for that language.
-
-Using Copilot inside a Codespace shows just how easy it is to get up and running with GitHub's suite of [Collaborative Coding](https://github.com/features#features-collaboration) tools.
-
-> **Note**
-> This skills exercise will focus on leveraging GitHub Codespace. It is recommended that you complete the GitHub skill, [Codespaces](https://github.com/skills/code-with-codespaces), before moving forward with this exercise.
-
-### :keyboard: Activity: Enable Copilot inside a Codespace
-
-**We recommend opening another browser tab to work through the following activities so you can keep these instructions open for reference.**
-
-Before you open up a codespace on a repository, you can create a development container and define specific extensions or configurations that will be used or installed in your codespace. Let's create this development container and add copilot to the list of extensions.
-
-1. Navigating back to your **Code** tab of your repository, click the **Add file** drop-down button, and then click `Create new file`.
-1. Type or paste the following in the empty text field prompt to name your file.
-   ```
-   .devcontainer/devcontainer.json
-   ```
-1. In the body of the new **.devcontainer/devcontainer.json** file, add the following content:
-   ```
-   {
-       // Name this configuration
-       "name": "Codespace for Skills!",
-       "customizations": {
-           "vscode": {
-               "extensions": [
-                   "GitHub.copilot"
-               ]
-           }
-       }
-   }
-   ```
-1. Select the option to **Commit directly to the `main` branch**, and then click the **Commit new file** button.
-1. Navigate back to the home page of your repository by clicking the **Code** tab located at the top left of the screen.
-1. Click the **Code** button located in the middle of the page.
-1. Click the **Codespaces** tab on the box that pops up.
-1. Click the **Create codespace on main** button.
-
-   **Wait about 2 minutes for the codespace to spin itself up.**
-
-1. Verify your codespace is running. The browser should contain a VS Code web-based editor and a terminal should be present such as the below:
-   ![Screen Shot 2023-03-09 at 9 09 07 AM](https://user-images.githubusercontent.com/26442605/224102962-d0222578-3f10-4566-856d-8d59f28fcf2e.png)
-1. The `copilot` extension should show up in the VS Code extension list. Click the extensions sidebar tab. You should see the following:
-   ![Screen Shot 2023-03-09 at 9 04 13 AM](https://user-images.githubusercontent.com/26442605/224102514-7d6d2f51-f435-401d-a529-7bae3ae3e511.png)
-
-**Wait about 60 seconds then refresh your repository landing page for the next step.**
-
-<footer>
-
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
-
----
-
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/code-with-copilot) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
-
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
-
-</footer>
+        document.getElementById('yesButton').addEventListener('click', function() {                 //YESSSS button
+            document.getElementById('question').innerText = 'yiee ilove you soo much';
+            for (var i = 0; i < 100; i++) {
+                var heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.animationDuration = Math.random() * 2 + 3 + 's'; //between 3 and 5 secs
+                heart.style.animationDelay = Math.random() * 2 + 's'; // eto 0 and 2. di ko sure kung sure na
+                document.body.appendChild(heart);
+            }
+            document.getElementById('yesButton').style.display = 'none';
+            document.getElementById('noButton').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
